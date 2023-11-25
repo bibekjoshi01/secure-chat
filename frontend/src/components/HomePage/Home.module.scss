@@ -1,0 +1,16 @@
+@use "../../styles/mixins" as *;
+@use "../../styles/variables" as *;
+
+.main {
+  @include flex(start, center, null, 10rem);
+  height: 100vh;
+  background: url("../../assets/background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: $secondary-light;
+
+  .content {
+    font-size: 40px;
+  }
+}

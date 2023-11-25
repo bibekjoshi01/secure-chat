@@ -1,0 +1,77 @@
+@use "../../styles/mixins" as *;
+@use "../../styles/variables" as *;
+
+.main {
+  @include flex(center, center, null, null);
+  height: 100vh;
+  max-width: 800px;
+  width: fit-content;
+
+  .container {
+    background-color: $primary-dark;
+    border-radius: $border-xs;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 50px;
+    text-align: center;
+
+    .heading {
+      color: #fff;
+      font-size: 30px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .heading2 {
+      color: #fff;
+      font-size: 15px;
+      font-weight: 400;
+      margin: 10px 0;
+    }
+
+    .roomNo {
+      display: inline-block;
+      font-size: 30px;
+      color: #ccc;
+      font-weight: 500;
+      border-radius: 4px;
+      padding: 10px 20px;
+      background-color: $primary-light;
+      letter-spacing: 2px;
+    }
+
+    .footer {
+      @include flex(center, space-between, null, null);
+      margin-top: 40px;
+
+      .remainder {
+        display: block;
+        font-size: 15px;
+        font-weight: lighter;
+        color: #fff;
+        line-height: 20px;
+        width: 60%;
+        text-align: left;
+
+        span {
+          color: red;
+        }
+      }
+
+      .joinRoom {
+        padding: 10px 20px;
+        background-color: $secondary-light;
+        color: #fff;
+        border: none;
+        text-decoration: none;
+        font-size: 16px;
+        border-radius: $border-xs;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+
+        &:hover {
+          background-color: darken($secondary-light, 2%);
+        }
+      }
+    }
+  }
+}

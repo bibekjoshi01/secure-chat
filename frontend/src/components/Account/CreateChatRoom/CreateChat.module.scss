@@ -1,0 +1,82 @@
+@use "../../../styles/mixins" as *;
+@use "../../../styles/variables" as *;
+
+.createRoomForm {
+  @include flex(start, center, null, null);
+  flex-direction: column;
+  padding: 20px;
+  margin-top: 20px;
+
+  label {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #fff;
+  }
+
+  input {
+    width: 350px;
+    height: 40px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: none;
+    border-radius: $border-xs;
+    outline: none;
+    color: #fff;
+    background-color: $primary-light;
+  }
+
+  button {
+    padding: 10px 20px;
+    border-radius: $border-xs;
+    background-color: $secondary-light;
+    transition: all 0.3s ease-in-out;
+    color: #fff;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+
+    &:hover {
+      background-color: $secondary-light;
+    }
+  }
+
+  .remainder {
+    font-size: 12px;
+    color: #fff;
+    margin: 10px 0px 20px;
+    line-height: 20px;
+
+    .link {
+      text-decoration: none;
+      color: rgb(5, 5, 45);
+    }
+  }
+
+  .divider {
+    width: 100%;
+    height: 1px;
+    background-color: $primary-light;
+    border: none;
+  }
+
+  .joinChat {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: $secondary-light;
+    color: #fff;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: $border-xs;
+    cursor: pointer;
+    margin: 20px auto 0;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      background-color: darken($secondary-light, 2%);
+    }
+  }
+}

@@ -1,0 +1,49 @@
+@import "./variables";
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: $primary-font;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+input[type="number"] {
+  /* Disable the arrow icons */
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+/* Additional styling if needed */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: transparent; /* Adjust as needed */
+}
+
+html,
+body {
+  font-size: 62.5%;
+  max-width: 100vw;
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: clip;
+}
+
+@media screen and (max-width: 768px) {
+  html {
+    font-size: 55%;
+  }
+}
+@media screen and (max-width: 480px) {
+  html {
+    font-size: 42%;
+  }
+}
