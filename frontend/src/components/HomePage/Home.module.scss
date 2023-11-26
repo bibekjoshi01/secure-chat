@@ -2,15 +2,38 @@
 @use "../../styles/variables" as *;
 
 .main {
-  @include flex(start, center, null, 10rem);
-  height: 100vh;
-  background: url("../../assets/background.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
+  @include flex(center, center, null, null);
+  height: 100vh;  
+  max-width: 100%;
+  background: url("../../assets/background2.jpg");
   background-color: $secondary-light;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 
-  .content {
-    font-size: 40px;
+  .container {
+    @include flex(center, center, null, 10rem);
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+
+    @media (max-width: 765px) {
+      @include flex(center, center, column, 0rem);
+    }
+
+    .content {
+      width: 50%;
+      color: #fff;
+
+      h1 {
+        font-weight: bold;
+        font-size: 65px;
+      }
+      p {
+        color: #000;
+        font-size: 18px;
+      }
+    }
+
   }
 }

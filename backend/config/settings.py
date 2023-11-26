@@ -53,8 +53,8 @@ MIDDLEWARE = [
 ]
 
 AUTHENTICATION_BACKENDS = [
-    'src.room.backend.ChatRoomBackend',
-    'django.contrib.auth.backends.ModelBackend',
+    "src.room.backend.ChatRoomBackend",
+    "django.contrib.auth.backends.ModelBackend",
 ]
 
 
@@ -78,7 +78,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "config.wsgi.application"
 ASGI_APPLICATION = "config.asgi.application"
-AUTH_USER_MODEL = 'room.ChatRoom'
+AUTH_USER_MODEL = "room.ChatRoom"
 
 
 # Database
@@ -150,6 +150,13 @@ REST_FRAMEWORK = {
         "no_underscore_before_number": True,
     },
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    "DEFAULT_PARSER_CLASSES": [
+        "djangorestframework_camel_case.parser.CamelCaseFormParser",
+        "djangorestframework_camel_case.parser.CamelCaseJSONParser",
+    ],
+    "JSON_UNDERSCOREIZE": {
+        "no_underscore_before_number": True,
+    },
 }
 
 

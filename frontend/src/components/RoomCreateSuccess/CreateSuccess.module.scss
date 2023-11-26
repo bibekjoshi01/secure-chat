@@ -3,7 +3,6 @@
 
 .main {
   @include flex(center, center, null, null);
-  height: 100vh;
   max-width: 800px;
   width: fit-content;
 

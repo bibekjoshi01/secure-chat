@@ -4,29 +4,54 @@
 .joinRoomForm {
   @include flex(start, center, null, null);
   flex-direction: column;
-  padding: 20px;
+  padding: 20px 20px 0px;
   margin-top: 20px;
 
-  label {
-    font-size: 16px;
-    margin-bottom: 10px;
-    color: #fff;
-  }
-
-  input {
-    width: 350px;
-    height: 40px;
-    font-size: 16px;
+  .formGroup {
     margin-bottom: 20px;
-    padding: 10px;
-    border: none;
-    border-radius: $border-xs;
-    outline: none;
-    color: #fff;
-    background-color: $primary-light;
+    width: 100%;
+
+    label {
+      font-size: 16px;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+
+    .inputGroup {
+      position: relative;
+
+      .icon {
+        position: absolute;
+        top: 50%;
+        right: 1rem;
+        transform: translateY(-35%);
+        cursor: pointer;
+        font-size: 16px;
+        color: $secondary-light;
+      }
+    }
+
+    input {
+      margin: 10px 0px 5px;
+      width: 100%;
+      height: 40px;
+      font-size: 16px;
+      padding: 10px;
+      border: none;
+      border-radius: $border-xs;
+      outline: none;
+      color: #fff;
+      background-color: $primary-light;
+    }
+
+    .error {
+      font-size: 10px;
+      color: red;
+    }
   }
 
-  button {
+  .submitBtn {
+    width: 100%;
     padding: 10px 20px;
     background-color: $secondary-light;
     color: #fff;
@@ -34,12 +59,15 @@
     font-size: 16px;
     border-radius: $border-xs;
     cursor: pointer;
-    margin: 20px 0px;
-    width: 100%;
+    margin: 0px 0px 20px;
     transition: all 0.3s ease-in-out;
 
+    &:focus {
+      outline: 1px solid $primary-light;
+    }
+
     &:hover {
-      background-color: $secondary-light;
+      background-color: darken($secondary-light, 2%);
     }
   }
 
@@ -50,8 +78,7 @@
     border: none;
   }
 
-  a {
-    margin-top: 20px;
+  .createRoom {
     padding: 10px 20px;
     background-color: $secondary-light;
     color: #fff;
@@ -66,7 +93,10 @@
 
     &:hover {
       background-color: darken($secondary-light, 2%);
+    }
 
+    &:focus {
+      outline: 1px solid $primary-light;
     }
   }
 }

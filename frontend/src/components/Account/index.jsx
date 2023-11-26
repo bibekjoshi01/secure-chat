@@ -5,16 +5,7 @@ import CreateChatRoom from "./CreateChatRoom";
 import JoinChatRoom from "./JoinChatRoom";
 
 function index() {
-  const [isCreatingRoom, setCreatingRoom] = useState(false);
-
-  const handleCreateRoomClick = () => {
-    setCreatingRoom(true);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Your form submission logic here
-  };
+  const [activeForm, setActiveForm] = useState("join");
 
   return (
     <section className={styles.main}>
@@ -23,12 +14,12 @@ function index() {
         <p className={styles.desc}>Your Gateway to Secure Conversations</p>
 
         <div>
-          {isCreatingRoom ? (
+          {activeForm === "create" ? (
             // Display Create New Room form
-            <CreateChatRoom setCreatingRoom={setCreatingRoom} />
+            <CreateChatRoom setActiveForm={setActiveForm} />
           ) : (
             // Display Join Chat Room form
-            <JoinChatRoom handleCreateRoomClick={handleCreateRoomClick} />
+            <JoinChatRoom setActiveForm={setActiveForm} />
           )}
         </div>
       </div>
