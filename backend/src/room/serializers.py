@@ -1,3 +1,4 @@
+import random
 from rest_framework import serializers
 from django.contrib.auth.password_validation import validate_password
 from .models import ChatRoom
@@ -49,27 +50,55 @@ class ChatRoomRegisterSerializer(serializers.ModelSerializer):
         max_length=16, min_length=8, required=True, validators=[validate_password]
     )
     name = serializers.CharField(max_length=50)
+    max_members = serializers.IntegerField(required=True)
 
     class Meta:
         model = ChatRoom
-        fields = [
-            "password",
-            "name",
-        ]
+        fields = ["password", "name", "max_members"]
+
+    def validate_max_members(self, max_members):
+        if max_members <= 0:
+            raise serializers.ValidationError(
+                {"message": "Please enter valid number of members!"}
+            )
+
+    def generate_unique_room_code(self):
+        while True:
+            # Generate a 12-digit room code
+            room_code = "".join(str(random.randint(0, 9)) for _ in range(12))
+
+            # Check if the room code already exists
+            if not ChatRoom.objects.filter(room_code=room_code).exists():
+                return room_code
 
     def create(self, validated_data):
-        # Generate a unique room ID using uuid
-        room_id = str(123535)
+        # Generate a unique room code
+        room_code = self.generate_unique_room_code()
+
+        if 'max_members' not in validated_data:
+            raise serializers.ValidationError("Hello !")
+
+        # Generate a random 6-digit pin code
+        pin_code = str(random.randint(100000, 999999))
 
         # Create the ChatRoom instance
         room_instance = ChatRoom.objects.create_room(
             password=validated_data["password"],
-            room_code=room_id,
-            pin_code='122344',
+            room_code=room_code,
+            pin_code=pin_code,
             name=validated_data["name"],
+            max_members=validated_data["max_members"],
         )
 
         return room_instance
 
     def to_representation(self, instance):
-        return {"room_code": instance.room_code, "pin_code": instance.pin_code}
+        return {
+            "message": "Room Created Successfully!",
+            "data": {
+                "room_name": instance.name,
+                "room_code": instance.room_code,
+                "pin_code": instance.pin_code,
+                "max_members": instance.max_members,
+            },
+        }

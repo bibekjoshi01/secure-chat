@@ -4,6 +4,7 @@ Django settings for secure_chat project.
 
 from pathlib import Path
 import os
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -146,23 +147,39 @@ REST_FRAMEWORK = {
     ),
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
     "PAGE_SIZE": 10,
-    "JSON_UNDERSCOREIZE": {
-        "no_underscore_before_number": True,
-    },
-    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    "DEFAULT_RENDERER_CLASSES": (
+        "djangorestframework_camel_case.render.CamelCaseJSONRenderer",
+        "djangorestframework_camel_case.render.CamelCaseBrowsableAPIRenderer",
+    ),
     "DEFAULT_PARSER_CLASSES": [
+        'djangorestframework_camel_case.parser.CamelCaseMultiPartParser',
         "djangorestframework_camel_case.parser.CamelCaseFormParser",
         "djangorestframework_camel_case.parser.CamelCaseJSONParser",
     ],
     "JSON_UNDERSCOREIZE": {
         "no_underscore_before_number": True,
     },
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
+NESTED_FORM_PARSER = {"OPTIONS": {"allow_empty": True, "allow_blank": True}}
 
 SPECTACULAR_SETTINGS = {
+    "SCHEMA_COMPONENT_SPLIT_UNDERSCORES": False,
     "TITLE": "Secure Chat API DOCUMENTATION",
     "DESCRIPTION": "SCHAT: Chat AnyWhere!",
     "VERSION": "1.0.0",
     "SERVE_INCLUDE_SCHEMA": False,
+    "POSTPROCESSING_HOOKS": [
+        "drf_spectacular.hooks.postprocess_schema_enums",
+        "drf_spectacular.contrib.djangorestframework_camel_case.camelize_serializer_fields",
+    ],
+}
+
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
+    "ROTATE_REFRESH_TOKEN": False,
+    "BLACKLIST_AFTER_ROTATION": False,
 }

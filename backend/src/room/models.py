@@ -39,7 +39,7 @@ class ChatRoom(AbstractBaseUser, PermissionsMixin):
     room_code = models.CharField(max_length=12, unique=True)
     pin_code = models.CharField(max_length=6, blank=True, null=True)
     name = models.CharField(max_length=50, null=True, blank=True)
-    max_members = models.IntegerField(default=16)
+    max_members = models.PositiveIntegerField(default=16, null=True, blank=True)
     photo = models.ImageField(validators=[validate_image], blank=True, null=True)
 
     is_superuser = models.BooleanField(
