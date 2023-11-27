@@ -11,7 +11,24 @@
     border-radius: $border-xs;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 50px;
+    position: relative;
     text-align: center;
+
+    .close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      cursor: pointer;
+
+      .closeIcon {
+        background-color: $primary-light;
+        color: #ccc;
+        font-size: 18px;
+        padding: 8px;
+        border-radius: 4px;
+        box-sizing: content-box;
+      }
+    }
 
     .heading {
       color: #fff;

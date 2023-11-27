@@ -17,3 +17,21 @@ export const login = createAsyncThunk(
     }
   }
 );
+
+export const register = createAsyncThunk(
+  "auth/register",
+  async (roomData, { rejectWithValue }) => {
+    const { name, password, maxMembers } = roomData;
+    try {
+      const body = JSON.stringify({
+        name,
+        password,
+        maxMembers,
+      });
+      const { data } = await API.register(body);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);

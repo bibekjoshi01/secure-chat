@@ -1,10 +1,10 @@
-import React from 'react'
-import setCookie from './setCookie';
+import React from "react";
+import setCookie from "./setCookie";
 
 function deleteCookie(name) {
-    setCookie(name, "", {
-      'max-age': -1
-    })
-  }
+  setCookie(name, "", {
+    "max-age": -1,
+  });
+}
 
-export default deleteCookie
+export default deleteCookie;

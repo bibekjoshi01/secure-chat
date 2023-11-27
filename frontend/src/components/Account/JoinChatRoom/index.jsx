@@ -6,12 +6,12 @@ import { login } from "../Redux/thunk";
 import { useDispatch } from "react-redux";
 import { ImEye, ImEyeBlocked } from "react-icons/im";
 import { useRouter } from "next/router";
-import { successAlert } from "@/components/Alert/Redux/alertSlice";
+import { errorAlert, successAlert } from "@/components/Alert/Redux/alertSlice";
 
 const validationSchema = Yup.object({
-  // roomCode: Yup.string()
-  //   .matches(/^[0-9]{3}$/, "Room code must be exactly 12 digits")
-  //   .required("Room code is required"),
+  roomCode: Yup.string()
+    .matches(/^[0-9]{12}$/, "Room code must be exactly 12 digits")
+    .required("Room code is required"),
   password: Yup.string().required("Password is required"),
 });
 
@@ -49,11 +49,11 @@ function index({ setActiveForm }) {
             dispatch(successAlert(response?.message));
           } else {
             dispatch(successAlert("Logged In Successfully"));
-            router.push("/chat");
+            router.push(`/chat/${response?.roomId}`);
           }
         })
         .catch((error) => {
-          console.log(error);
+          dispatch(errorAlert(error?.message));
         });
     },
   });
@@ -69,7 +69,6 @@ function index({ setActiveForm }) {
             name="roomCode"
             value={formik.values.roomCode}
             autoComplete="on"
-            inputMode="numeric"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
@@ -106,7 +105,6 @@ function index({ setActiveForm }) {
         </button>
         <hr className={styles.divider} />
         <a
-          href="#button"
           className={styles.createRoom}
           onClick={() => setActiveForm("create")}
         >
