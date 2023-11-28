@@ -63,6 +63,6 @@ const authSlice = createSlice({
     });
   },
 });
-
+  
 export const { OpenRoomCreateSuccess, CloseRoomCreateSuccess } = authSlice.actions;
 export default authSlice.reducer;

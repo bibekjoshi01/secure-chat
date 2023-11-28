@@ -1,14 +1,25 @@
 import Time from "./time";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaPlus } from "react-icons/fa6";
 import { FaMicrophone } from "react-icons/fa";
 import { BsEmojiSmile } from "react-icons/bs";
 import groupIcon from "../../assets/male.png";
 import { TbDotsVertical } from "react-icons/tb";
 import styles from "./ChatDashboard.module.scss";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { roomSelector } from "./Redux/selector";
+import { roomProfile } from "./Redux/thunk";
 
-const ChatDashboard = () => {
+const ChatDashboard = ({ roomId }) => {
+  const dispatch = useDispatch();
+  const { roomInfo } = useSelector(roomSelector);
+
+  useEffect(() => {
+    dispatch(roomProfile(roomId));
+  }, [roomInfo, roomId]);
+
   const [msg, setMsg] = useState("");
   const handleChange = (e) => {
     setMsg(e.target.value);
@@ -18,7 +29,7 @@ const ChatDashboard = () => {
     <div className={styles.header}>
       <div className={styles.groupInfo}>
         <Image src={groupIcon} alt="groupIcon" className={styles.groupIcon} />
-        <span>Exploring Beyond Infinity</span>
+        <span>{roomInfo?.name}</span>
       </div>
       <div className={styles.options}>
         <TbDotsVertical className={styles.icon} />

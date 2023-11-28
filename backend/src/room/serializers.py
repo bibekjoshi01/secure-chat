@@ -102,3 +102,9 @@ class ChatRoomRegisterSerializer(serializers.ModelSerializer):
                 "max_members": instance.max_members,
             },
         }
+
+
+class ChatRoomSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ChatRoom
+        fields = ['room_id', 'name', 'photo']
