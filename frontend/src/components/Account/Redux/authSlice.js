@@ -51,8 +51,14 @@ const authSlice = createSlice({
           sameSite: "Lax",
         });
       }
+      if (action?.payload?.roomId) {
+        setCookie("roomId", action?.payload?.roomId, {
+          secure: true,
+          "max-age": 360000,
+          sameSite: "Lax",
+        });
+      }
       state.loading = false;
-      state.roomId = action?.payload?.roomId;
       state.loadingLogin = true;
     });
     builder.addCase(login.rejected, (state) => {
@@ -60,9 +66,11 @@ const authSlice = createSlice({
       deleteCookie("accessToken");
       deleteCookie("refreshToken");
       deleteCookie("isAuthenticated");
+      deleteCookie("roomId");
     });
   },
 });
-  
-export const { OpenRoomCreateSuccess, CloseRoomCreateSuccess } = authSlice.actions;
+
+export const { OpenRoomCreateSuccess, CloseRoomCreateSuccess } =
+  authSlice.actions;
 export default authSlice.reducer;

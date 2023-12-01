@@ -7,18 +7,19 @@ import { BsEmojiSmile } from "react-icons/bs";
 import groupIcon from "../../assets/male.png";
 import { TbDotsVertical } from "react-icons/tb";
 import styles from "./ChatDashboard.module.scss";
-import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { roomSelector } from "./Redux/selector";
-import { roomProfile } from "./Redux/thunk";
 
 const ChatDashboard = ({ roomId }) => {
-  const dispatch = useDispatch();
   const { roomInfo } = useSelector(roomSelector);
+  const [groupIconSrc, setGroupIconSrc] = useState(groupIcon);
 
   useEffect(() => {
-    dispatch(roomProfile(roomId));
-  }, [roomInfo, roomId]);
+    if (roomInfo?.photo) {
+      setGroupIconSrc(roomInfo?.photo);
+      // console.log("Updated groupIconSrc:", roomInfo?.photo);
+    }
+  }, [roomInfo]);
 
   const [msg, setMsg] = useState("");
   const handleChange = (e) => {
@@ -28,7 +29,13 @@ const ChatDashboard = ({ roomId }) => {
   const ChatHeader = ({ styles }) => (
     <div className={styles.header}>
       <div className={styles.groupInfo}>
-        <Image src={groupIcon} alt="groupIcon" className={styles.groupIcon} />
+        <Image
+          src={groupIconSrc}
+          alt="groupIcon"
+          className={styles.groupIcon}
+          width="40"
+          height="40"
+        />
         <span>{roomInfo?.name}</span>
       </div>
       <div className={styles.options}>

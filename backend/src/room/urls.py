@@ -7,5 +7,5 @@ router = DefaultRouter()
 urlpatterns = [
     path("login", ChatRoomLoginView.as_view(), name="room_login"),
     path("register", ChatRoomRegisterView.as_view(), name="room_create"),
-    path('info/<str:room_code>', ChatRoomInfoView.as_view(), name='chat-room-info'),
+    path('info/<str:room_id>', ChatRoomInfoView.as_view(), name='chat-room-info'),
 ]

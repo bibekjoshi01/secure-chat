@@ -1,1 +1,1 @@
-export const roomSelector = (state) => state.room
+export const roomSelector = (state) => state.room;
